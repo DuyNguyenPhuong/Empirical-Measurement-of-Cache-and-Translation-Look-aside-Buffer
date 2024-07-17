@@ -10,6 +10,63 @@ The motivation embarked upon in this project is to acquire a comprehensive and d
 
 This knowledge is not merely academic; it is practical, enabling the optimization of software to utilize the full potential of existing hardware structure, which, for example, can be applied to High-Frequency Trading (HFT).
 
+### Prerequisites
+
+- A Unix-like operating system (Linux/MacOS)
+- GCC compiler
+
+#### Go to CacheSizeTest folder
+
+```bash
+cd CacheSizeTest
+```
+
+#### To generate data of speed vs array size
+
+```bash
+chmod +x run_cache.sh
+./run_cache.sh
+```
+
+Then check the result in `cache_results.csv`
+
+### To run the tests cases to check for correctness
+
+```bash
+chmod +x run_all_cache_tests.sh
+./run_all_cache_tests.sh
+```
+
+### How to run TLB Test
+
+After ssh to mantis
+
+#### Go to TLBSizeTest folder
+
+```bash
+cd TLBSizeTest
+```
+
+#### To generate data of speed vs number of page
+
+```bash
+chmod +x run_tlb.sh
+./run_tlb.sh
+```
+
+Then check the result in `tlb_results.csv`
+
+### To run the tests cases to check for correctness
+
+```bash
+chmod +x run_all_tlb_tests.sh
+./run_all_tlb_tests.sh
+```
+
+### Contact
+
+If you come across any program, contact me through email: `nguyend2@carleton.edu`
+
 ## II. METHODOLOGY
 
 This project employs a systematic approach to empirically measure the characteristics of cache memory and Translation look-aside buffers (TLB) in modern processors such as size or performance. Our methodology mimics the data access and time the access time per element in nanoseconds. Then we will graph the result and try to see for the "jump", which is when the access time suddenly rises. The "jump" can be considered as a potential boundary between layers of Cache or TLB.
@@ -147,65 +204,3 @@ For example, if we have a cache miss when accessing the 1st element, the element
 When a virtual address needs to be translated, the TLB is queried first. If the translation is found, the physical address can be immediately used for data access. If the translation is not found (a "miss"), we need to look it up in the page table.
 
 **Virtual Machine**: Virtual Machines are just like normal computers but they allow multiple operating systems to run concurrently on a single physical machine. Virtual Machine is an essential tool for efficient resource utilization, application testing, and system security.
-
-### Prerequisites
-
-- A Unix-like operating system (Linux/MacOS)
-- GCC compiler
-- Run on Mantis
-
-### How to run Cache Test
-
-After ssh to mantis
-
-#### Go to CacheSizeTest folder
-
-```bash
-cd CacheSizeTest
-```
-
-#### To generate data of speed vs array size
-
-```bash
-chmod +x run_cache.sh
-./run_cache.sh
-```
-
-Then check the result in `cache_results.csv`
-
-### To run the tests cases to check for correctness
-
-```bash
-chmod +x run_all_cache_tests.sh
-./run_all_cache_tests.sh
-```
-
-### How to run TLB Test
-
-After ssh to mantis
-
-#### Go to TLBSizeTest folder
-
-```bash
-cd TLBSizeTest
-```
-
-#### To generate data of speed vs number of page
-
-```bash
-chmod +x run_tlb.sh
-./run_tlb.sh
-```
-
-Then check the result in `tlb_results.csv`
-
-### To run the tests cases to check for correctness
-
-```bash
-chmod +x run_all_tlb_tests.sh
-./run_all_tlb_tests.sh
-```
-
-### Contact
-
-If you come across any program, contact me through email: `nguyend2@carleton.edu`
