@@ -1,6 +1,4 @@
-# Empirical-Measurement-of-Cache-and-Translation-Look-aside-Buffer
-
-# Size Measurement for Translation Look-aside Buffer and Cache in Virtual Machine Mantis
+# Empirical Measurement for Translation Look-aside Buffer and Cache in Virtual Machine Mantis
 
 **Dave Nguyen, Student, Carleton College, Tanya Amert, Professor, Carleton College**
 
@@ -8,9 +6,9 @@
 
 ## I. INTRODUCTION
 
-The motivation embarked upon in this project is to acquire a comprehensive and detailed experiment into the empirical characterization and understanding of two of the most critical elements in the foundation of modern computing architectures: the Translation Lookaside Buffer (TLB) and the cache memory. This knowledge is not merely academic; it is practical, enabling the optimization of software to utilize the full potential of existing hardware structure, which, for example, can be applied to High-Frequency Trading (HFT).
+The motivation embarked upon in this project is to acquire a comprehensive and detailed experiment into the empirical characterization and understanding of two of the most critical elements in the foundation of modern computing architectures: the Translation Lookaside Buffer (TLB) and the cache memory.
 
-**Organization**: The remainder of the paper is structured as follows: Section II is needed background. Section III outlines the methodology. Section IV presents our experiment results after applying the methodology. Section V is the conclusions of the size of TLB and Cache and how they simultaneously affect access time in virtual machine Mantis and future works. Finally, Section VI is a reference.
+This knowledge is not merely academic; it is practical, enabling the optimization of software to utilize the full potential of existing hardware structure, which, for example, can be applied to High-Frequency Trading (HFT).
 
 ## II. METHODOLOGY
 
