@@ -4,59 +4,15 @@
 
 **Dave Nguyen, Student, Carleton College, Tanya Amert, Professor, Carleton College**
 
-**Abstract**—This paper presents a comprehensive study to measure empirically the Translation Look-aside Buffer (TLB) and cache sizes in modern CPUs. By developing a program that mimics the process of accessing elements, we will investigate the speed (performance) and size of both TLB and cache hierarchies (layers). Our methodology involves implementing functions designed to access varying numbers of elements and utilize different data access patterns. This approach allows us to infer characteristics such as cache size, the cost of cache misses, and the strategies employed by the CPU for data caching. The findings will allow us to have a deeper understanding of the behaviors of TLB and Cache, therefore, helping in the optimization of the program efficiency and speed.
-
-**Index Terms**—Translation Look-aside Buffer, Cache, CPU, Hierarchies
+**Abstract**—This paper presents a comprehensive study to measure empirically the Translation Look-aside Buffer (TLB) and cache sizes in modern CPUs. By developing a program that mimics the process of accessing elements, we will investigate the speed (performance) and size of both TLB and cache hierarchies (layers). The findings will allow us to have a deeper understanding of the behaviors of TLB and Cache, therefore, helping in the optimization of the program efficiency and speed.
 
 ## I. INTRODUCTION
 
 The motivation embarked upon in this project is to acquire a comprehensive and detailed experiment into the empirical characterization and understanding of two of the most critical elements in the foundation of modern computing architectures: the Translation Lookaside Buffer (TLB) and the cache memory. This knowledge is not merely academic; it is practical, enabling the optimization of software to utilize the full potential of existing hardware structure, which, for example, can be applied to High-Frequency Trading (HFT).
 
-Context: The cache memory concept was first introduced by Maurice Wilkes, a British computer scientist who is regarded as one of the key figures in the early days of computer development in 1965 (Wikipedia, 2023).
-
-Nowadays, cache and TLB are still important in enhancing the performance and efficiency of processors. The TLB plays an important role in efficiently translating virtual-to-physical address translations. On the other hand, the processor cache serves as a quick-accessible storage layer, by storing frequently accessed data and instructions near the CPU.
-
-Through time, the cache memory idea has developed differently but Wilkes’s core concept remains unchanged. Overall, cache and TLB open a lot of opportunities for performance improvement in modern computer architectures.
-
-**Current Need**: Understanding the characteristics, operational strategies, and performance of the TLB and cache is primarily for the computer science field. This knowledge is not only just academic, but it also is practical, enabling the optimization of software, for example, improvements in processing speed. However, each computer has its own set of cache and TLB which are likely different from others. Most importantly, the effects of TLB and Cache are intertwined with each other, therefore, without a deeper observation, it is extremely hard to recognize each other’s effect.
-
-**What we did**: To come up against this challenge, this project is specialized to mimic the access data process with a range of different array sizes, access frequencies, or ranges,... Then we will extract the result from different controlled experiments we set and analyze the access time or different behaviors of access time to look for the expected characteristic of either the cache or the TLB. We try to deep dive into the architecture, sizes, and operational behaviors of these components.
-
-**Related work and why it doesn’t do that**: While prior studies have provided valuable theoretical frameworks and partial insights into these components, there remains a void in practical, accessible tools that can run on any computer that the user is using. We want to build a product that users can easily try and test themselves at home. This will make the understanding of Cache and TLB more easily and exciting for users.
-
-**Contributions (in light of related work)**: Our contributions are: we provide a detailed design of the measurement tools that is scalable and accessible with any computer, present empirical data that records the access strategies and performance in real-world scenarios, and finally, unveil some insight regarding the intertwined effect between TLB and Cache.
-
 **Organization**: The remainder of the paper is structured as follows: Section II is needed background. Section III outlines the methodology. Section IV presents our experiment results after applying the methodology. Section V is the conclusions of the size of TLB and Cache and how they simultaneously affect access time in virtual machine Mantis and future works. Finally, Section VI is a reference.
 
-## II. BACKGROUND
-
-To understand the significance of and continue on this project, it’s essential to delve into the foundational concepts of cache memory and the Translation Lookaside Buffer (TLB), which are two of the most important elements in the architecture of modern processors. we will also proceed to explain what is a virtual machine where we test my project.
-
-**Cache Memory**: Cache memory provides high-speed data access to a processor by storing instances of programs and data routinely accessed by the processor. As a result, cache memory reduces the time needed to access data from the main memory. One of the reasons why data from the cache can be accessed so fast is because the cache is located near the CPU. This difference in distance can dramatically diminish access times and reduce dependency on slower main memory, thereby accelerating the overall computing process.
-
-The idea of cache memory can be traced back to the 1960s, with Maurice Wilkes’s concept of "slave memory". This earned him the Turing Award, which is considered one of the highest honors in computer science (Wikipedia, 2023).
-
-Cache memory is organized into several levels (L1, L2, and L3) that vary in size, speed, and proximity to the CPU:
-
-- **L1 Cache (Level 1)**: This is the smallest and fastest cache level, integrated directly into the processor chip. L1 cache stores instructions and data that are immediately required by the CPU, with typical sizes ranging from 2 KB to 64 KB and access time around 0.5 to 1.5 nanoseconds.
-
-- **L2 Cache (Level 2)**: Slightly larger and slower than L1, but still operates at high speeds and is usually integrated into the CPU chip. It has sizes ranging from 256KB to several megabytes and access time is around 3 to 10 nanoseconds.
-
-- **L3 Cache (Level 3)**: L3 cache is shared among all cores of the CPU to store data that are less frequently accessed. L3 cache sizes can range from 2MB to over 50MB with the access time around 10 to 40 nanoseconds.
-
-When the CPU requests data, if the data is found in the cache (a cache hit), it can be accessed quickly. If the data is not in the cache (a cache miss), it must be fetched from the main memory, which takes more time.
-
-We can maximize cache hits by understanding how computers store the data. In most computers, it stored the data in row-major order. In row-major order, elements of an array are stored row by row. Specifically, C (the language that we will use in this experiment) uses row-major order for multi-dimensional arrays.
-
-For example, if we have a cache miss when accessing the 1st element, the elements from the 1st to 16th position will be put in the cache line.
-
-**Translation Lookaside Buffer (TLB)**: The TLB is a special type of cache that stores recent translations of virtual memory addresses to physical addresses. The TLB operates on the principle of spatial and temporal locality, which means it stores the most recently and frequently used address translations.
-
-When a virtual address needs to be translated, the TLB is queried first. If the translation is found, the physical address can be immediately used for data access. If the translation is not found (a "miss"), we need to look it up in the page table.
-
-**Virtual Machine**: Virtual Machines are just like normal computers but they allow multiple operating systems to run concurrently on a single physical machine. Virtual Machine is an essential tool for efficient resource utilization, application testing, and system security.
-
-## III. METHODOLOGY
+## II. METHODOLOGY
 
 This project employs a systematic approach to empirically measure the characteristics of cache memory and Translation look-aside buffers (TLB) in modern processors such as size or performance. Our methodology mimics the data access and time the access time per element in nanoseconds. Then we will graph the result and try to see for the "jump", which is when the access time suddenly rises. The "jump" can be considered as a potential boundary between layers of Cache or TLB.
 
@@ -104,7 +60,7 @@ In general, we need to carefully design our measurement routines to avoid unnece
 
 - **Cross Reference**: After achieving the size of the Cache, we cross-reference with our existing information of Cache Size in a virtual machine or Wikipedia’s information regarding the TLB size.
 
-## IV. EXPERIMENT
+## III. EXPERIMENT
 
 In this section, we delve into the results obtained from our empirical analysis of cache memory and Translation look-aside buffers (TLB), specifically in the virtual machine Mantis.
 
@@ -140,7 +96,7 @@ One more thing we want to point out is that if we look at Figure 4, we can see t
 
 So we can see the TLB and cache both affect the access time.
 
-## V. CONCLUSION
+## IV. CONCLUSION
 
 In this project, we have done a comprehensive exploration of cache memory and Translation look-aside buffers (TLB) within modern computer architectures, to explore their behavior and performance. We successfully determined the sizes of the Cache and delivered an acceptable result of TLB. Moreover, we were able to observe the intertwined effect between Cache and TLB or there exists a pre-fetching effect in modern computers when the access time makes periodic "mini jumps". Moreover, we have created a program that is scalable and applicable to run on other computers making it accessible to multiple users.
 
@@ -152,7 +108,7 @@ Moreover, we also want to improve our measurement tools so that we can try with 
 
 Most importantly, we want to create an optimized access data approach so that we can both utilize the cache and TLB behaviors to access the data in minimum time. This can be extremely useful in high-frequency trading where 1 nanosecond can worth millions.
 
-## VI. REFERENCE
+## V. REFERENCE
 
 - Arpaci-Dusseau, Remzi H., and Andrea C. Arpaci-Dusseau. "Paging: Faster Translations (TLBs)." In Operating Systems: Three Easy Pieces, Chapter 19. Arpaci-Dusseau Books, 2015
 
@@ -165,6 +121,34 @@ However, we need to consider some potential risks:
 - **Compiler Optimization**: Compilers do many hidden clever things, for example removing loops that increment values that no other part of the program subsequently uses. So to measure the access time correctly, we need to ensure the compiler does not remove any code that we intended for it to run (Arpaci-Dusseau, 2015).
 
 - **Multiple CPUs**: Most systems today consist of multiple CPUs. Moreover, each CPU will have its own TLB hierar-
+
+## VI. APPENDIX
+
+To understand the significance of and continue on this project, it’s essential to delve into the foundational concepts of cache memory and the Translation Lookaside Buffer (TLB), which are two of the most important elements in the architecture of modern processors. we will also proceed to explain what is a virtual machine where we test my project.
+
+**Cache Memory**: Cache memory provides high-speed data access to a processor by storing instances of programs and data routinely accessed by the processor. As a result, cache memory reduces the time needed to access data from the main memory. One of the reasons why data from the cache can be accessed so fast is because the cache is located near the CPU. This difference in distance can dramatically diminish access times and reduce dependency on slower main memory, thereby accelerating the overall computing process.
+
+The idea of cache memory can be traced back to the 1960s, with Maurice Wilkes’s concept of "slave memory". This earned him the Turing Award, which is considered one of the highest honors in computer science (Wikipedia, 2023).
+
+Cache memory is organized into several levels (L1, L2, and L3) that vary in size, speed, and proximity to the CPU:
+
+- **L1 Cache (Level 1)**: This is the smallest and fastest cache level, integrated directly into the processor chip. L1 cache stores instructions and data that are immediately required by the CPU, with typical sizes ranging from 2 KB to 64 KB and access time around 0.5 to 1.5 nanoseconds.
+
+- **L2 Cache (Level 2)**: Slightly larger and slower than L1, but still operates at high speeds and is usually integrated into the CPU chip. It has sizes ranging from 256KB to several megabytes and access time is around 3 to 10 nanoseconds.
+
+- **L3 Cache (Level 3)**: L3 cache is shared among all cores of the CPU to store data that are less frequently accessed. L3 cache sizes can range from 2MB to over 50MB with the access time around 10 to 40 nanoseconds.
+
+When the CPU requests data, if the data is found in the cache (a cache hit), it can be accessed quickly. If the data is not in the cache (a cache miss), it must be fetched from the main memory, which takes more time.
+
+We can maximize cache hits by understanding how computers store the data. In most computers, it stored the data in row-major order. In row-major order, elements of an array are stored row by row. Specifically, C (the language that we will use in this experiment) uses row-major order for multi-dimensional arrays.
+
+For example, if we have a cache miss when accessing the 1st element, the elements from the 1st to 16th position will be put in the cache line.
+
+**Translation Lookaside Buffer (TLB)**: The TLB is a special type of cache that stores recent translations of virtual memory addresses to physical addresses. The TLB operates on the principle of spatial and temporal locality, which means it stores the most recently and frequently used address translations.
+
+When a virtual address needs to be translated, the TLB is queried first. If the translation is found, the physical address can be immediately used for data access. If the translation is not found (a "miss"), we need to look it up in the page table.
+
+**Virtual Machine**: Virtual Machines are just like normal computers but they allow multiple operating systems to run concurrently on a single physical machine. Virtual Machine is an essential tool for efficient resource utilization, application testing, and system security.
 
 ### Prerequisites
 
